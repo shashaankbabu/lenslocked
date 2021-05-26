@@ -30,5 +30,9 @@ func (u *Users) New(w http.ResponseWriter, r *http.Request) {
 // Create() is used to process a signup form.
 // POST /signup
 func (u *Users) Create(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "This is temp response.")
+	if err := r.ParseForm(); err != nil {
+		panic(err)
+	}
+	fmt.Fprintln(w, r.PostForm["email"])
+	fmt.Fprintln(w, r.PostForm["password"])
 }
